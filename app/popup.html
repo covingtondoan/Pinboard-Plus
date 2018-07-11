@@ -39,9 +39,11 @@
              ng-click="openUrl('http:pinboard.in/')">
             Pinboard - (<span id="user">{{userInfo.name}}</span>)
           </a>
+          <a class="tab-sets" href="#" title="Tab set" ng-click="openUrl('http:pinboard.in/tabs/')">TS</a>
           <a class="random" href="#" title="Random unread item" ng-click="openUrl('http:pinboard.in/random/?type=unread')">R</a>
         </div>
         <div class="alert" ng-show="pageInfo.isSaved">{{renderSavedTime(pageInfo.time)}}</div>
+        <div class="save-tabs">[<a href="#" ng-click="saveTabs()">Save tab set</a>]</div>
         <div class="logout">[<a href="#" ng-click="logout()">log out</a>]</div>
       </div>
       <form id="add-post-form" ng-submit="postSubmit()">

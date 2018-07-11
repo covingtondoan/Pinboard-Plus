@@ -102,6 +102,11 @@ ul .item-title {
     right: 5px;
 }
 
+#header .save-tabs {
+    position: absolute;
+    right: 50px;
+}
+
 #header a {
     color: #AAA;
 }
@@ -122,7 +127,8 @@ ul .item-title {
     background-color: #FFF;
 }
 
-#header .random {
+#header .random,
+#header .tab-sets {
     color: #BBB;
 }
 

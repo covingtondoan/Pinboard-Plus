@@ -287,6 +287,10 @@ app.controller(
        }
      };
 
+     $scope.saveTabs = function () {
+       bg.saveTabs();
+     };
+
      $scope.logout = function () {
        bg.logout();
      };

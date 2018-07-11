@@ -14,6 +14,50 @@ var logout = function () {
   Notifications.clearAll();
 };
 
+// save tabs
+// copied from the Official Pinboard Chrome extension (version 1.0.0)
+var BASE_URL = 'https://pinboard.in';
+var SUBMIT_URL  = BASE_URL + '/tabs/save/';
+var DISPLAY_URL = BASE_URL + '/tabs/show/';
+var makeTabList = function(windows) {
+  winz = [];
+  result = {
+    browser: 'chrome',
+    windows: winz
+  };
+  var chromeWinz = windows;
+  for (var i = 0; i < chromeWinz.length; i++) {
+    var chromeTabz = chromeWinz[i].tabs;
+    var tabz = [];
+
+    for (var j = 0; j < chromeTabz.length; j++) {
+      var cTab = chromeTabz[j];
+      if (cTab.url) {
+        tabz.push({title: cTab.title, url: cTab.url});
+      }
+    }
+    winz.push(tabz);
+  }
+  tabList = result;
+  var params = new FormData();
+  var req = new XMLHttpRequest();
+  params.append('data', JSON.stringify(result));
+  console.log(JSON.stringify(result));
+  req.open('POST', SUBMIT_URL, true);
+  req.onreadystatechange = function() {
+    if (req.readyState == 4) {
+      chrome.tabs.create({url: DISPLAY_URL});
+    }
+  }
+  req.send(params);
+}
+
+var saveTabs = function() {
+  chrome.windows.getAll({
+    'populate': true
+  }, makeTabList);
+}
+
 var getUserInfo = function () {
   return Pinboard.getUserInfo();
 };
